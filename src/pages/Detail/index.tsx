@@ -1,4 +1,4 @@
-export function Detail(){
+export default function Detail(){
     return(
         <div>
             <h1>Pagina Detalhes da Moeda</h1>
