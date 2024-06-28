@@ -12,7 +12,7 @@ export default function RoutesApp(){
             <Route path="/criptoapp/detail" element={<Detail />} />
             <Route path="/*" element={<Notfound />} /> */}
             <Route path="/" element={<Home />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/detail/:cripto?" element={<Detail />} />
             <Route path="/*" element={<Notfound />} />
         </Routes>
     )
