@@ -17,3 +17,47 @@
 .form button{
     background: transparent;
 }
+table{
+    border-collapse: separate;
+    border-spacing: 0 14px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+table{
+    font-size: 16px;
+    margin: 0.5em 0 .75em;
+}
+th{
+    color: white;
+}
+.tr{
+    background-color: #1d1c20;
+}
+td:first-child,
+th:first-child{
+    border-radius: 8px 0 0 8px;
+}
+td:last-child,
+th:last-child{
+    border-radius: 0 8px 8px 0;
+}
+table th,
+table td{
+    padding: 14px;
+    text-align: center;
+}
+.tdLabel{
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+.tdProfite{
+    color: #12f98a;
+    font-weight: bold;
+}
+.tdLoss{
+    color: #f91257;
+    font-weight: bold;
+}
