@@ -68,6 +68,10 @@ export default function Home(){
 
                 </tbody>
             </table>
+
+            <button className={styles.buttonMore}>
+                Carregar mais..
+            </button>
         </main>
     )
 }
