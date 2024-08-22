@@ -102,30 +102,39 @@ export default function Home(){
 
                 <tbody id='tbody'>
 
-                    <tr className={styles.tr}>
-                        <td className={styles.tdLabel} data-label="Moeda">
-                            <div className={styles.name}>
-                                <Link to={'/detail/bitcoin'}>
-                                    <span>Bitcoin</span> | BTC
-                                </Link>
-                            </div>
-                        </td>
+                {coins.length > 0 && coins.map((item)=>(
+                <tr className={styles.tr} key={item.id}>
 
-                        <td className={styles.tdLabel} data-label="Valor mercado">
-                            1T
-                        </td>
+                    <td className={styles.tdLabel} data-label="Moeda">
+                        <div className={styles.name}>
+                            <img 
+                            className= {styles.logo}
+                            src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`} 
+                            alt="Logo Cripto" />
+                            <Link to={`/detail/${item.id}`}>
+                                <span>{item.name}</span> | {item.symbol}
+                            </Link>
+                        </div>
+                    </td>
 
-                        <td className={styles.tdLabel} data-label="Preco">
-                            8.000
-                        </td>
-                        <td className={styles.tdLabel} data-label="Volume">
-                            2B
-                        </td>
-                        <td className={styles.tdProfite} data-label="Mudanca em 24Hr">
-                            <span>1.20</span>
-                        </td>
+                    <td className={styles.tdLabel} data-label="Valor mercado">
+                        {item.fromatedMarket}
+                    </td>
 
-                    </tr>
+                    <td className={styles.tdLabel} data-label="Preco">
+                        {item.fromatedPrice}
+                    </td>
+                    <td className={styles.tdLabel} data-label="Volume">
+                        {item.formatedVolume}
+                    </td>
+                    <td 
+                    className={Number(item.changePercent24Hr) > 0 ? styles.tdProfite : styles.tdLoss} 
+                    data-label="Mudanca em 24Hr">
+                        <span>{Number(item.changePercent24Hr).toFixed(2)}</span>
+                    </td>
+
+                </tr>
+                ))}
 
                 </tbody>
             </table>
