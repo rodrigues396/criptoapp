@@ -16,6 +16,9 @@ interface CoinProps{
     marketCapUsd: string;
     volumeUsd24Hr: string;
     explorer: string;
+    fromatedPrice?: string;
+    fromatedMarket?: string;
+    formatedVolume?: string;
 }
 
 interface DataProp{
@@ -36,6 +39,28 @@ export default function Home(){
         .then(response => response.json())
         .then((data: DataProp)=> {
             const coinsData = data.data;
+
+            const price = Intl.NumberFormat("en-US",{
+                style: "currency",
+                currency: "USD",
+            })
+
+            const priceCompact = Intl.NumberFormat("en-US",{
+                style: "currency",
+                currency: "USD",
+                notation: "compact"
+            })
+
+            const formatedResult = coinsData.map((item)=>{
+                const formated = {
+                    ...item,
+                    fromatedPrice: price.format(Number(item.priceUsd)),
+                    fromatedMarket: priceCompact.format(Number(item.marketCapUsd)),
+                    formatedVolume: priceCompact.format(Number(item.volumeUsd24Hr))
+                }
+                return formated;
+            })
+            setCoins(formatedResult)
         })
     }
 
