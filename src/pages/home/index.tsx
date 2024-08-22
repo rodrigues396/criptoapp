@@ -1,11 +1,43 @@
 import styles from '../Home/home.module.css';
 import { BsSearch } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
+
+interface CoinProps{
+    id: string;
+    name: string;
+    symbol: string;
+    priceUsd: string;
+    vwap24Hr: string;
+    changePercent24Hr: string;
+    rank: string;
+    supply: string;
+    maxSupply: string;
+    marketCapUsd: string;
+    volumeUsd24Hr: string;
+    explorer: string;
+}
+
+interface DataProp{
+    data: CoinProps[];
+}
 
 export default function Home(){
     const [input, setImput] = useState('');
+    const [coins, setCoins] = useState<CoinProps[]>([]);
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        getData();
+    }, [])
+
+    async function getData(){
+        fetch('https://api.coincap.io/v2/assets?limit=10&offset=0')
+        .then(response => response.json())
+        .then((data: DataProp)=> {
+            const coinsData = data.data;
+        })
+    }
 
     function handleSubmit(e: FormEvent){
         e.preventDefault();
@@ -13,6 +45,10 @@ export default function Home(){
         if(input === '') return;
 
         navigate(`/detail/${input}`)
+    }
+
+    function handleGetMore(){
+        alert('teste')
     }
 
     return(
@@ -69,7 +105,7 @@ export default function Home(){
                 </tbody>
             </table>
 
-            <button className={styles.buttonMore}>
+            <button className={styles.buttonMore} onClick={handleGetMore}>
                 Carregar mais..
             </button>
         </main>
